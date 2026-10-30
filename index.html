@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pressure Valves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <div class="console" id="console">
+    <header class="bar">
+      <div class="brand">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17.5a9 9 0 1 1 17 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 17l4.2-5.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.6" fill="currentColor"/></svg>
+        <span class="name">PRESSURE VALVES</span>
+        <span class="chip" id="chip" hidden></span>
+      </div>
+      <button class="leave" id="leave" type="button" hidden>Esc to leave</button>
+    </header>
+
+    <section class="screen pad" id="s-menu">
+      <h1>Keep every gauge in its band</h1>
+      <p class="lede">Three stations share one pressure system. You see two gauges and run two valves. Your valves also move gauges you cannot see, so you have to talk.</p>
+      <div class="actions">
+        <button class="btn primary" id="btn-online" type="button">Play with 2 friends</button>
+        <button class="btn" id="btn-local" type="button">Play on this screen</button>
+      </div>
+      <div class="join" id="join" hidden>
+        <label for="code-in">ROOM CODE</label>
+        <div class="row">
+          <input id="code-in" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" value="">
+          <button class="btn" id="btn-newcode" type="button">New code</button>
+          <button class="btn primary" id="btn-enter" type="button">Enter room</button>
+        </div>
+        <p id="join-note">Pick a code and give it to your two teammates. Everyone opens this page and enters the same code.</p>
+      </div>
+      <div class="rules">
+        <div class="rule"><b>GAUGES</b><span>You see your two gauges. Each has a target band.</span></div>
+        <div class="rule"><b>VALVES</b><span>Every + raises one gauge and lowers another, often a teammate's.</span></div>
+        <div class="rule"><b>BURSTS</b><span>A gauge pushed below 0 or above 20 bursts and the move is blocked. Three bursts end the run.</span></div>
+        <div class="rule"><b>CLOCK</b><span>Two stages, 120 s each. Hold every band for 2 s to clear a stage.</span></div>
+      </div>
+    </section>
+
+    <section class="screen pad" id="s-lobby" hidden>
+      <div class="lobby-top">
+        <div class="code"><strong id="lb-code">----</strong><button class="btn" id="lb-copy" type="button">Copy code</button></div>
+        <div class="conn" id="lb-conn"><i></i><span>Connecting</span></div>
+      </div>
+      <div class="seats" id="seats"></div>
+      <p class="status-line" id="lb-status"></p>
+    </section>
+
+    <section class="screen game" id="s-game" hidden>
+      <div class="sub">
+        <div class="sub-l"><span>Stage <b id="stg">1</b>/2</span><span id="you">You are player 2</span></div>
+        <div class="bursts" id="bursts" role="img" aria-label="Bursts left">
+          <span>Bursts</span><i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="field">
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        <div class="gauges" id="gauges"></div>
+        <div class="valves" id="valves"></div>
+      </div>
+      <p class="hint" id="hint"></p>
+      <p class="note" id="note" hidden>Local game: switch stations in the header to play every seat.</p>
+      <div class="timer">
+        <div class="track"><div class="fill" id="tfill"></div></div>
+        <span class="tnum" id="tnum">120.0s</span>
+      </div>
+    </section>
+
+    <div class="overlay" id="ov" hidden></div>
+  </div>
+</main>
+
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
