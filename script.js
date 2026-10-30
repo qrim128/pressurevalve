@@ -271,6 +271,7 @@ function toLobbyForNewRound(){
   resetRound();
   A.screen='lobby';
   pub();
+  ovKey='';show();
 }
 function startStage(n){
   A.stage=n;A.P=makePuzzle(A.code+'|'+A.ep,n);
@@ -534,7 +535,7 @@ function renderOverlay(){
     else if(A.paused)key='pause:'+A.paused;
     else if(A.intro>0)key='intro:'+A.stage;
   }
-  if(key===ovKey)return;
+  if(key===ovKey&&(key!==''||ov.hidden))return;
   ovKey=key;
   ov.replaceChildren();
   ov.className='overlay';
