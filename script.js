@@ -1,6 +1,30 @@
 /* Standalone room: peer-to-peer over WebRTC using PeerJS (public signaling server). No Claude sign-in needed.
    Each browser claims one of three connection slots for the room code, then dials the other two.
    Exposes the same small API the game uses: join, leave, presence, peers, onPeers, onConnection. */
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+document.addEventListener('keydown', e => {
+  // F12
+  if (e.key === 'F12') {
+    e.preventDefault();
+  }
+
+  // Ctrl + U
+  if (e.ctrlKey && e.key.toLowerCase() === 'u') {
+    e.preventDefault();
+  }
+
+  // Ctrl + Shift + I / J / C (DevTools)
+  if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+    e.preventDefault();
+  }
+
+  // Ctrl + S or Cmd + S (Disable Save Page)
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+    e.preventDefault();
+  }
+});
+
 window.makeRoom=function(){
   var S=null,peerCbs=[],connCbs=[],connected=false,api={full:false};
   function fireP(){peerCbs.forEach(function(f){try{f();}catch(e){}});}
